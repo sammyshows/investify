@@ -1,6 +1,6 @@
 <template>
   <div id="page" class="h-screen flex flex-col justify-between pt-10 pb-5">
-    <div class="h-full px-10">
+    <div class="h-full px-8">
       <slot></slot>
     </div>
     <NavigationBar></NavigationBar>

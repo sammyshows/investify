@@ -1,36 +1,30 @@
 import {createWebHistory, createRouter, RouteRecordRaw} from "vue-router"
 import Search from "../views/Search.vue"
-import Home from "../views/Home.vue"
-import About from '../views/About.vue'
-import AirportDetail from '../views/AirportDetail.vue'
-import AirportDestinations from '@/views/AirportDestinations.vue'
+import SearchDetail from "../views/SearchDetail.vue"
+import SearchDetailSummary from "../views/SearchDetailSummary.vue"
+import SearchDetailChart from "../views/SearchDetailChart.vue"
 import PageNotFound from '../views/PageNotFound.vue'
 
 const routes: RouteRecordRaw[] = [
     {
-        path: "/",
-        name: "Home",
-        component: Home
-    },
-    {
         path: "/search",
         name: "Search",
-        component: Search
+        component: Search,
     },
     {
-        path: "/about",
-        name: "About",
-        component: About
-    },
-    {
-        path: "/airport/:code",
-        name: "AirportDetail",
-        component: AirportDetail,
+        path: "/search/:code",
+        name: "SearchDetail",
+        component: SearchDetail,
         children: [
             {
-                path: 'destinations',
-                name: 'AirportDestinations',
-                component: AirportDestinations
+                path: "summary",
+                name: "SearchDetailSummary",
+                component: SearchDetailSummary,
+            },
+            {
+                path: "chart",
+                name: "SearchDetailChart",
+                component: SearchDetailChart,
             }
         ]
     },
