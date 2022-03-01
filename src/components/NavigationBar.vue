@@ -1,33 +1,25 @@
 <template>
   <div>
     <div class="sm:block">
-      <div>
-        <nav class="flex" aria-label="Tabs">
-          <a v-for="tab in tabs" :key="tab.name" :href="tab.href" :class="[tab.current ? 'text-blue-200' : 'hover:text-gray-700', 'w-1/4 py-4 px-1 text-center font-medium text-white text-sm']" :aria-current="tab.current ? 'page' : undefined">
-            {{ tab.name }}
-          </a>
-        </nav>
-      </div>
+      <nav class="flex justify-around px-2.5" aria-label="Tabs">
+        <BellIcon class="h-10 w-10 text-gray-700" />
+        <SearchIcon class="h-10 w-10" />
+        <HomeIcon class="h-10 w-10 text-gray-700" />
+        <DocumentSearchIcon class="h-10 w-10 text-gray-700" />
+        <UserCircleIcon class="h-10 w-10 text-gray-700" />
+      </nav>
     </div>
   </div>
 </template>
 
 <script>
-const tabs = [
-  { name: 'Notifications', href: '#', current: false },
-  { name: 'Search', href: '#', current: true },
-  { name: 'Home', href: '#', current: false },
-  { name: 'Studies', href: '#', current: false },
-  { name: 'Account', href: '#', current: false },
-]
+import { BellIcon, SearchIcon, HomeIcon, DocumentSearchIcon, UserCircleIcon } from '@heroicons/vue/outline'
 
 export default {
   name: "NavigationBar",
 
-  setup() {
-    return {
-      tabs,
-    }
+  components: {
+    BellIcon, SearchIcon, HomeIcon, DocumentSearchIcon, UserCircleIcon
   }
 }
 </script>
