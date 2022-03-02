@@ -96,42 +96,51 @@
   </div>
 
   <h2 class="font-medium mb-2">RECENT FINANCIALS</h2>
-  <div class="px-1 py-2 border-t border-white hover:bg-gray-700 duration-300">
+  <div class="flex justify-between items-center px-1 py-2 border-t border-white hover:bg-gray-700 duration-300">
     <p class="text-xs">Income Statement</p>
+    <SpeakerphoneIcon class="h-5 w-5 text-bright-cyan" />
   </div>
-  <div class="px-1 py-2 border-t border-white hover:bg-gray-700 duration-300">
+  <div class="flex justify-between items-center px-1 py-2 border-t border-white hover:bg-gray-700 duration-300">
     <p class="text-xs">Balance Sheet</p>
+    <SpeakerphoneIcon class="h-5 w-5 text-bright-cyan" />
   </div>
-  <div class="mb-10 px-1 py-2 border-t border-b border-white hover:bg-gray-700 duration-300">
+  <div class="flex justify-between items-center mb-10 px-1 py-2 border-t border-b border-white hover:bg-gray-700 duration-300">
     <p class="text-xs">Cash Flow</p>
+    <SpeakerphoneIcon class="h-5 w-5 text-bright-cyan" />
   </div>
 
   <button class="block mx-auto px-8 py-2 text-xl text-black bg-bright-cyan rounded-lg">Start a Study</button>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
+import { SpeakerphoneIcon } from "@heroicons/vue/solid"
 
-export default {
+export default defineComponent({
   name: "Search Detail Summary",
+
+  components: {
+    SpeakerphoneIcon
+  },
 
   props: [
     "companyOverview", "quote"
   ],
 
   computed: {
-    price() {
+    price(): number | void {
       let number = parseFloat(this.quote["05. price"])
       if (number)
         return this.roundToThree(number)
     },
 
-    change() {
+    change(): number | void {
       let number = parseFloat(this.quote["09. change"])
       if (number)
         return this.roundToThree(number)
     },
 
-    margin() {
+    margin(): number | void {
       let number = parseFloat(this.quote["10. change percent"])
       if (number)
         return this.roundToTwo(number)
@@ -139,13 +148,13 @@ export default {
   },
 
   methods: {
-    roundToTwo(number) {
-      return Math.round((number + Number.EPSILON) * 100) / 100
+    roundToTwo(num: number): number {
+      return Math.round((num + Number.EPSILON) * 100) / 100
     },
 
-    roundToThree(number) {
-      return Math.round((number + Number.EPSILON) * 1000) / 1000
+    roundToThree(num: number): number {
+      return Math.round((num + Number.EPSILON) * 1000) / 1000
     }
   }
-}
+})
 </script>

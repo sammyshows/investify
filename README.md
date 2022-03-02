@@ -1,19 +1,14 @@
-# investify
+# Investify
 
-## Project setup
-```
-yarn install
-```
+## What is Investify?
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+Investify is a mobile-first application aimed at making it easy to track you investment
+portflio, with a particular focus on stocks. The app also allows users to do their own
+research into a company through a guided step-by-step process, making it easier for 
+investors to value companies.
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## What technologies does Investify use?
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Currently Investify uses Vue3 with TailwindCSS on the Front End. It currently gets all of
+the financial data on equitiesby consuming the REST API at AlphaVantage. AlphaVantage was
+chosen given its wide range of data and also quite a lot of historical data.
