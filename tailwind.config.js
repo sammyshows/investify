@@ -6,6 +6,11 @@ module.exports = {
     extend: {
       colors: {
         cyan: colors.cyan,
+        'bright-green': '#45FF58'
+      },
+
+      fontSize: {
+        'tiny': '0.6rem'
       }
     },
   },
