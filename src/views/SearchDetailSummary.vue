@@ -1,8 +1,10 @@
 <template>
-  <h2 class="text-2xl">VUL $9.497</h2>
-  <p class="mb-5 text-bright-green font-medium">+0.072 (+1.76%) - 3 MONTHS</p>
+  <div class="flex justify-between items-end mb-5">
+    <h2 class="text-2xl">{{ quote["01. symbol"] }} ${{ price }}</h2> <!-- Will probably need to use regex to round to 2 or 3 decimals -->
+    <p class="text-lg text-bright-green font-medium">{{ change }} ({{ margin }}%)</p>
+  </div>
 
-  <div class="grid grid-cols-2 gap-x-4">
+  <div class="grid grid-cols-2 gap-x-4 mb-10">
     <div class="cols-span-1 flex justify-between"> <!-- Daily high -->
       <p class="text-tiny mb-0.5">High</p>
       <p class="text-tiny mb-0.5">{{ quote["03. high"] }}</p>
@@ -69,29 +71,42 @@
     </div>
     <div class="cols-span-1 flex justify-between"> <!-- Shares -->
       <p class="text-tiny mb-0.5">Shares</p>
-      <p class="text-tiny mb-0.5">{{ companyOverview["SharesOutstanding"] }}</p>
+      <p class="text-tiny mb-0.5">{{ parseInt(companyOverview["SharesOutstanding"]) / 1000000 }}M</p> <!-- May want to use a computed value here so can choose to display in Thousands(K), Millions(M) or Billions(B) -->
     </div>
     <div class="cols-span-1 flex justify-between"> <!-- Fiscal Year End -->
       <p class="text-tiny mb-0.5">Fiscal Year End</p>
       <p class="text-tiny mb-0.5">{{ companyOverview["FiscalYearEnd"] }}</p>
     </div>
     <div class="cols-span-1 flex justify-between"> <!-- Dividend Date -->
-      <p class="text-tiny mb-0.5">Dividend Date</p>
+      <p class="text-tiny mb-0.5">Div Date</p>
       <p class="text-tiny mb-0.5">{{ companyOverview["DividendDate"] }}</p>
     </div>
     <div class="cols-span-1 flex justify-between"> <!-- Ex Dividend Date -->
-      <p class="text-tiny mb-0.5">Ex Dividend Date</p>
+      <p class="text-tiny mb-0.5">Ex Div Date</p>
       <p class="text-tiny mb-0.5">{{ companyOverview["ExDividendDate"] }}</p>
     </div>
     <div class="cols-span-1 flex justify-between"> <!-- Dividend Per Share -->
-      <p class="text-tiny mb-0.5">Dividend Per Share</p>
+      <p class="text-tiny mb-0.5">Div Per Share</p>
       <p class="text-tiny mb-0.5">{{ companyOverview["DividendPerShare"] }}</p>
     </div>
     <div class="cols-span-1 flex justify-between"> <!-- Dividend Yield -->
-      <p class="text-tiny mb-0.5">Dividend Yield</p>
+      <p class="text-tiny mb-0.5">Div Yield</p>
       <p class="text-tiny mb-0.5">{{ companyOverview["DividendYield"] }}</p>
     </div>
   </div>
+
+  <h2 class="font-medium mb-2">RECENT FINANCIALS</h2>
+  <div class="px-1 py-2 border-t border-white hover:bg-gray-700 duration-300">
+    <p class="text-xs">Income Statement</p>
+  </div>
+  <div class="px-1 py-2 border-t border-white hover:bg-gray-700 duration-300">
+    <p class="text-xs">Balance Sheet</p>
+  </div>
+  <div class="mb-10 px-1 py-2 border-t border-b border-white hover:bg-gray-700 duration-300">
+    <p class="text-xs">Cash Flow</p>
+  </div>
+
+  <button class="block mx-auto px-8 py-2 text-xl text-black bg-bright-cyan rounded-lg">Start a Study</button>
 </template>
 
 <script>
@@ -101,6 +116,36 @@ export default {
 
   props: [
     "companyOverview", "quote"
-  ]
+  ],
+
+  computed: {
+    price() {
+      let number = parseFloat(this.quote["05. price"])
+      if (number)
+        return this.roundToThree(number)
+    },
+
+    change() {
+      let number = parseFloat(this.quote["09. change"])
+      if (number)
+        return this.roundToThree(number)
+    },
+
+    margin() {
+      let number = parseFloat(this.quote["10. change percent"])
+      if (number)
+        return this.roundToTwo(number)
+    }
+  },
+
+  methods: {
+    roundToTwo(number) {
+      return Math.round((number + Number.EPSILON) * 100) / 100
+    },
+
+    roundToThree(number) {
+      return Math.round((number + Number.EPSILON) * 1000) / 1000
+    }
+  }
 }
 </script>
