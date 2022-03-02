@@ -9,6 +9,6 @@ investors to value companies.
 
 ## What technologies does Investify use?
 
-Currently Investify uses Vue3 with TailwindCSS on the Front End. It currently gets all of
+Currently Investify uses Vue3 and TypeScript with TailwindCSS on the Front End. It currently gets all of
 the financial data on equitiesby consuming the REST API at AlphaVantage. AlphaVantage was
 chosen given its wide range of data and also quite a lot of historical data.
