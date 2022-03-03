@@ -91,7 +91,7 @@
     </div>
     <div class="cols-span-1 flex justify-between"> <!-- Dividend Yield -->
       <p class="text-tiny mb-0.5">Div Yield</p>
-      <p class="text-tiny mb-0.5">{{ companyOverview["DividendYield"] }}</p>
+      <p class="text-tiny mb-0.5">{{ companyOverview["DividendYield"] }}%</p>
     </div>
   </div>
 

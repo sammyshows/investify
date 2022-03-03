@@ -12,7 +12,7 @@ const routes: RouteRecordRaw[] = [
         component: Search,
     },
     {
-        path: "/search/:code",
+        path: "/search/:symbol",
         name: "SearchDetail",
         component: SearchDetail,
         children: [

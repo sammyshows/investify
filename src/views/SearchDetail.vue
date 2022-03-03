@@ -38,6 +38,7 @@ export default {
         { name: 'CHART', path: '/search/code/chart' }
       ],
 
+      symbol: window.location.pathname.split('/')[2],
       companyOverview: {},
       quote: {}
     }
@@ -45,8 +46,7 @@ export default {
 
   methods: {
     fetchOverview() {
-      // fetch("https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=B642KXFN4VUO0FC2", {
-      fetch("https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo", {
+      fetch(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=${this.symbol}&apikey=B642KXFN4VUO0FC2`, {
         "method": "GET"
       })
         .then(response => response.json())
@@ -54,7 +54,7 @@ export default {
     },
 
     fetchQuote() {
-      fetch("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=B642KXFN4VUO0FC2", {
+      fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${this.symbol}&apikey=B642KXFN4VUO0FC2`, {
         "method": "GET"
       })
         .then(response => response.json())
