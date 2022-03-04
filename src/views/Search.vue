@@ -15,7 +15,7 @@
         <p class="text-xs font-medium">NAME</p>
         <p class="text-xs font-medium">TICKER</p>
       </div>
-      <router-link v-for="result in searchResults" :to="{ name: 'SearchDetailSummary', params: { symbol: 'tsla' } }" class="flex justify-between items-center px-1 py-2 border-t border-white hover:bg-gray-700 duration-300 gap-x-10">
+      <router-link v-for="result in searchResults" :to="{ name: 'SearchDetailSummary', params: { symbol: result.symbol } }" class="flex justify-between items-center px-1 py-2 border-t border-white hover:bg-gray-700 duration-300 gap-x-10">
         <p class="text-xs truncate">{{ result.name }}</p>
         <p class="text-bright-cyan">{{ result.symbol }}</p>
       </router-link>

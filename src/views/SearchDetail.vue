@@ -2,19 +2,24 @@
   <PageContainer>
     <div class="flex justify-between">
       <PageTitle :pageDetails="pageDetails" class="truncate mr-3" />
-      <h2 class="mb-5 my-auto text-lg text-cyan-300">ASX:VUL</h2>
+      <h2 class="mb-5 my-auto text-lg text-cyan-300">{{ quote["01. symbol"] }}</h2>
     </div>
     <NavigationTabs :tabs="tabs" />
     <router-view :companyOverview="companyOverview" :quote="quote" />
   </PageContainer>
 </template>
 
-<script>
-import PageContainer from "../components/PageContainer";
-import PageTitle from "../components/PageTitle";
-import NavigationTabs from "../components/NavigationTabs";
+<script lang="ts">
+import { defineComponent } from "vue";
+import PageContainer from "../components/PageContainer.vue";
+import PageTitle from "../components/PageTitle.vue";
+import NavigationTabs from "../components/NavigationTabs.vue";
 
-export default {
+interface StringObject {
+  [index: string]: string;
+}
+
+export default defineComponent({
   name: "Search Detail",
 
   components: {
@@ -29,7 +34,7 @@ export default {
   data() {
     return {
       pageDetails: {
-        title: "Vulcan Energy Resources",
+        title: '',
         returnPath: "/search"
       },
 
@@ -40,7 +45,13 @@ export default {
 
       symbol: window.location.pathname.split('/')[2],
       companyOverview: {},
-      quote: {}
+      quote: {} as StringObject
+    }
+  },
+
+  watch: {
+    'companyOverview.Name'(newName) {
+      this.pageDetails.title = newName
     }
   },
 
@@ -61,5 +72,5 @@ export default {
         .then(quote => this.quote = quote["Global Quote"])
     }
   }
-}
+})
 </script>

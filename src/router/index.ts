@@ -15,6 +15,7 @@ const routes: RouteRecordRaw[] = [
         path: "/search/:symbol",
         name: "SearchDetail",
         component: SearchDetail,
+        props: true,
         children: [
             {
                 path: "summary",
